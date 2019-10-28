@@ -32,7 +32,7 @@ type Metadata struct {
 	Host   string
 }
 
-func NewDoc(pkgDir string) (doc *Doc, err error) {
+func NewDoc(pkgDir, outputDir string) (doc *Doc, err error) {
 	pkgDoc, err := parse.NewPackageDoc(pkgDir)
 	if err != nil {
 		return doc, err
@@ -41,7 +41,7 @@ func NewDoc(pkgDir string) (doc *Doc, err error) {
 		return doc, errors.New("Found 0 packages, expected 1.")
 	}
 
-	fiPath := filepath.Join(pkgDir, pkgDoc.Name+".apib")
+	fiPath := filepath.Join(outputDir, pkgDoc.Name+".apib")
 
 	fi, err := os.Create(fiPath)
 	if err != nil {
