@@ -41,7 +41,7 @@ Test2doc will generate markdown documentation for this endpoint in the [API Blue
 ### Get Widget [GET]
 retrieves a single Widget
 
-+ Response 200 
++ Response 200
 
     + Body
 
@@ -49,24 +49,25 @@ retrieves a single Widget
                 "Id": 2,
                 "Name": "Pencil",
                 "Role": "Utensil"
-            }        
+            }
 ```
 
-Which you can then parse and host w/ *Apiary.io*, eg [here](http://docs.testingit.apiary.io/#). 
+Which you can then parse and host w/ _Apiary.io_, eg [here](http://docs.testingit.apiary.io/#).
 Or use a custom parser and host yourself.
 
 ![screenshot](http://s17.postimg.org/6mz3ich1b/Screen_Shot_2015_11_06_at_9_38_46_AM.png)
 
-
 <br>
 
 ### Things to note:
+
 1. Go pkg name **becomes** `Group` name
 2. Go handler name **becomes** endpoint title
 3. Go handler `godoc` string **becomes** endpoint description
 4. **Everything else is recorded & interpreted directly from the requests and responses**
 
 Eg.
+
 ```go
 package widget
 
@@ -83,16 +84,13 @@ becomes
 retrieves a single Widget
 ```
 
-
 <br>
 
 ### Installation
 
-`go get github.com/adams-sarah/test2doc/...`
+`go get github.com/cormoran/test2doc/...`
 
 <br>
-
-
 
 ### Integrating test2doc
 
@@ -103,7 +101,7 @@ Very few additions, and only to your testing code.
 ```go
 
 import (
-	"github.com/adams-sarah/test2doc/test"
+	"github.com/cormoran/test2doc/test"
 )
 
 var server *test.Server
@@ -147,9 +145,9 @@ func TestMain(m *testing.M) {
 `gorilla/mux` configurations
 
 ```go
-	import "github.com/adams-sarah/test2doc/vars"
+	import "github.com/cormoran/test2doc/vars"
 	// ...
-	
+
 	extractor := vars.MakeGorillaMuxExtractor(myGorillaRouter)
 	test.RegisterURLVarExtractor(extractor)
 ```
@@ -157,7 +155,7 @@ func TestMain(m *testing.M) {
 `julienschmidt/httprouter` configurations
 
 ```go
-	import "github.com/adams-sarah/test2doc/vars"
+	import "github.com/cormoran/test2doc/vars"
 	// ...
 
 	extractor := vars.MakeHTTPRouterExtractor(myHTTPRouter)
@@ -165,6 +163,7 @@ func TestMain(m *testing.M) {
 ```
 
 #### 2. Combine the output `.apib` files
+
 `test2doc` will spit out one doc file per package.
 
 Eg. A package tree like:
@@ -191,7 +190,6 @@ Will produce separate apib files, eg:
     └── widgets.apib
 ```
 
-
 You will need to add the doc header (below) and combine all of the package doc files after your tests run.
 
 eg.:
@@ -211,7 +209,7 @@ for f in ${files[@]}; do
 done
 ```
 
-where `apib.tmpl` includes the doc header information. 
+where `apib.tmpl` includes the doc header information.
 Something like:
 
 ```
@@ -223,4 +221,3 @@ HOST: https://api.mysite.com
 My Site is a fancy site. The API is also fancy.
 
 ```
-
