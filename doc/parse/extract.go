@@ -27,14 +27,15 @@ func GetTitle(longFnName string) string {
 }
 
 func GetDescription(longFnName string) (desc string) {
-	shortFnName := getShortFnName(longFnName)
+	return longFnName
+	// shortFnName := getShortFnName(longFnName)
 
-	doc := funcsMap[shortFnName]
-	if doc != nil {
-		desc = strings.TrimPrefix(doc.Doc, shortFnName+" ")
-	}
+	// doc := funcsMap[shortFnName]
+	// if doc != nil {
+	// 	desc = strings.TrimPrefix(doc.Doc, shortFnName+" ")
+	// }
 
-	return
+	// return
 }
 
 // IsFuncInPkg checks if this func belongs to the package
