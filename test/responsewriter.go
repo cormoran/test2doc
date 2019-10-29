@@ -1,12 +1,8 @@
 package test
 
 import (
-	"log"
 	"net/http"
 	"net/http/httptest"
-	"runtime"
-
-	"github.com/cormoran/test2doc/doc/parse"
 )
 
 type ResponseWriter struct {
@@ -40,38 +36,5 @@ func (rw *ResponseWriter) WriteHeader(c int) {
 }
 
 func (rw *ResponseWriter) setHandlerInfo() {
-	i := 1
-	max := 15
-
-	var pc uintptr
-	var file, fnName string
-	var ok, fnInPkg, sawPkg bool
-
-	// iterate until we find the top level func in this pkg (the handler)
-	for i < max {
-		pc, file, _, ok = runtime.Caller(i)
-		if !ok {
-			log.Println("test2doc: setHandlerInfo: !ok")
-			return
-		}
-
-		fn := runtime.FuncForPC(pc)
-		fnName = fn.Name()
-
-		fnInPkg = parse.IsFuncInPkg(fnName)
-		if sawPkg && !fnInPkg {
-			pc, file, _, ok = runtime.Caller(i - 1)
-			fn := runtime.FuncForPC(pc)
-			fnName = fn.Name()
-			break
-		}
-
-		sawPkg = fnInPkg
-		i++
-	}
-
-	rw.HandlerInfo = HandlerInfo{
-		FileName: file,
-		FuncName: fnName,
-	}
+	rw.HandlerInfo = GetHandlerInfo()
 }

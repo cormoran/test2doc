@@ -18,14 +18,28 @@ type Server struct {
 	doc *doc.Doc
 }
 
+type Config struct {
+	PackageDir string
+	OutputDir  string
+}
+
 // TODO: filter out 404 responses
-func NewServer(handler http.Handler, packageDir string, outputDir string) (s *Server, err error) {
+func NewServer(handler http.Handler, config *Config) (s *Server, err error) {
+	if config == nil {
+		config = &Config{}
+	}
+	if config.PackageDir == "" {
+		config.PackageDir = "."
+	}
+	if config.OutputDir == "" {
+		config.OutputDir = "."
+	}
 	// check if url var extractor func is set
 	if parse.Extractor == nil {
 		panic("please set a URLVarExtractor.")
 	}
 
-	outDoc, err := doc.NewDoc(packageDir, outputDir)
+	outDoc, err := doc.NewDoc(config.PackageDir, config.OutputDir)
 	if err != nil {
 		return s, err
 	}
