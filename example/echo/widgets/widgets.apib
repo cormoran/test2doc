@@ -1,10 +1,74 @@
 
 # Group Widgets
 
+## /widget
+
+### Func1 [POST]
+github.com/labstack/echo.WrapHandler.func1
+
++ Request (application/json)
+
+
+
+    + Body
+
+            {
+                "Id": 0,
+                "Name": "anotherwidget",
+                "Role": "controller"
+            }        
+
++ Response 201 (application/json)
+
+
+
+    + Body
+
+            {
+                "Id": 8,
+                "Name": "anotherwidget",
+                "Role": "controller"
+            }        
+
+
+
+## /widget/{id}
+
++ Parameters
+    + id: `2` (number)
+
+### Get Widget [GET]
+github.com/cormoran/test2doc/example/echo/widgets.GetWidget
+
++ Response 200 (application/json; charset=UTF-8)
+
+
+
+    + Body
+
+            {
+                "Id": 2,
+                "Name": "Pencil",
+                "Role": "Utensil"
+            }
+        
+
+
+
++ Response 400 (text/plain; charset=UTF-8)
+
+
+
+    + Body
+
+            strconv.ParseInt: parsing "hello": invalid syntax        
+
+
+
 ## /widgets
 
-### Get Widgets [GET]
-github.com/cormoran/test2doc/example/widgets.GetWidgets
+### Func1 [GET]
+github.com/labstack/echo.WrapHandler.func1
 
 + Response 200 (application/json)
 
@@ -54,68 +118,5 @@ github.com/cormoran/test2doc/example/widgets.GetWidgets
                     "Role": "Hack"
                 }
             ]        
-
-
-### Post Widget [POST]
-github.com/cormoran/test2doc/example/widgets.PostWidget
-
-+ Request (application/json)
-
-
-
-    + Body
-
-            {
-                "Id": 0,
-                "Name": "anotherwidget",
-                "Role": "controller"
-            }        
-
-+ Response 201 (application/json)
-
-
-
-    + Body
-
-            {
-                "Id": 8,
-                "Name": "anotherwidget",
-                "Role": "controller"
-            }        
-
-
-
-## /widgets/{id}
-
-+ Parameters
-    + id: `2` (number)
-
-### Get Widget [GET]
-github.com/cormoran/test2doc/example/widgets.GetWidget
-
-+ Response 200 (application/json)
-
-
-
-    + Body
-
-            {
-                "Id": 2,
-                "Name": "Pencil",
-                "Role": "Utensil"
-            }        
-
-
-
-+ Response 400 (text/plain; charset=utf-8)
-
-    + Headers
-            
-            X-Content-Type-Options: nosniff
-
-    + Body
-
-            strconv.ParseInt: parsing "hello": invalid syntax
-        
 
 

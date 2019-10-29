@@ -6,10 +6,9 @@ import (
 	"github.com/adams-sarah/prettytest"
 	"github.com/cormoran/test2doc/test"
 	"github.com/cormoran/test2doc/vars"
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo"
 )
 
-var router *mux.Router
 var server *test.Server
 
 type mainSuite struct {
@@ -18,13 +17,13 @@ type mainSuite struct {
 
 func TestRunner(t *testing.T) {
 	var err error
+	e := echo.New()
+	AddRoutes(e)
 
-	router = mux.NewRouter()
-	AddRoutes(router)
+	test.RegisterURLVarExtractor(vars.MakeEchoExtractor(e))
+	test.SetHandlerInfoFunc(vars.MakeEchoGetHandlerInfoFunc(e))
 
-	test.RegisterURLVarExtractor(vars.MakeGorillaMuxExtractor(router))
-
-	server, err = test.NewServer(router, &test.Config{
+	server, err = test.NewServer(e, &test.Config{
 		PackageDir: ".",
 		OutputDir:  ".",
 	})

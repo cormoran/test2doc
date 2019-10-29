@@ -3,7 +3,7 @@
 ### 1. run the tests
 
 ```bash
-cd example
+cd example/mux
 go test ./...
 ```
 
@@ -25,4 +25,4 @@ apib files are generated like so:
 ./scripts/combine.sh
 ```
 
-final apib doc file is generated at `example/apidoc.apib`
+final apib doc file is generated at `example/mux/apidoc.apib`

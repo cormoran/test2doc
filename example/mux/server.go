@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/cormoran/test2doc/example/foos"
-	"github.com/cormoran/test2doc/example/widgets"
+	"github.com/cormoran/test2doc/example/mux/foos"
+	"github.com/cormoran/test2doc/example/mux/widgets"
 	"github.com/gorilla/mux"
 )
 

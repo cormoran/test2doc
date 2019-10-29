@@ -1,4 +1,4 @@
-package widgets
+package foos
 
 import (
 	"testing"
@@ -21,7 +21,6 @@ func TestRunner(t *testing.T) {
 
 	router = mux.NewRouter()
 	AddRoutes(router)
-
 	test.RegisterURLVarExtractor(vars.MakeGorillaMuxExtractor(router))
 
 	server, err = test.NewServer(router, &test.Config{

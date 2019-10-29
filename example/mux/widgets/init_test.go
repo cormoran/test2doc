@@ -1,4 +1,4 @@
-package foos
+package widgets
 
 import (
 	"testing"
@@ -21,9 +21,13 @@ func TestRunner(t *testing.T) {
 
 	router = mux.NewRouter()
 	AddRoutes(router)
+
 	test.RegisterURLVarExtractor(vars.MakeGorillaMuxExtractor(router))
 
-	server, err = test.NewServer(router, ".", ".")
+	server, err = test.NewServer(router, &test.Config{
+		PackageDir: ".",
+		OutputDir:  ".",
+	})
 	if err != nil {
 		panic(err.Error())
 	}
